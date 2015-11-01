@@ -20,7 +20,8 @@ var WebPackConfig = {
         }  
 			}
 		]
-	}
+	},
+	devtool: 'source-map'
 };
 
 module.exports = WebPackConfig;

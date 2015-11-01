@@ -2,65 +2,13 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var CartConstants = require('../constants/CartConstants');
 var assign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
+var CartHelpers = require('./CartHelpers');
 
 var CHANGE_EVENT = 'change';
 
-var _catalog = [];
-
-for(var i=1; i<9; i++){
-  _catalog.push({
-    'id': 'Widget' + i,
-    'title':'Widget #' + i,
-    'summary': 'This is an awesome widget!',
-    'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, commodi.',
-    'cost': i,
-    'img': '/assets/product.png'
-  });
-}
-
+var _catalog = CartHelpers.getDummyCatalog();
 var _cartItems = [];
 
-function _removeItem(index){
-  _cartItems[index].inCart = false;
-  _cartItems.splice(index, 1);
-}
-
-function _increaseItem(index){
-  _cartItems[index].qty++;
-}
-
-function _decreaseItem(index){
-  if(_cartItems[index].qty>1){
-    _cartItems[index].qty--;
-  }
-  else {
-    _removeItem(index);
-  }
-}
-
-function _addItem(item){
-  if(!item.inCart){
-    item['qty'] = 1;
-    item['inCart'] = true;
-    _cartItems.push(item);
-  }
-  else {
-    _cartItems.forEach(function(cartItem, i){
-      if(cartItem.id===item.id){
-        _increaseItem(i);
-      }
-    });
-  }
-}
-
-function _cartTotals(){
-  var qty =0, total = 0;
-  _cartItems.forEach(function(cartItem){
-    qty+=cartItem.qty;
-    total+=cartItem.qty*cartItem.cost;
-  });
-  return {'qty': qty, 'total': total};
-}
 
 var AppStore = assign(EventEmitter.prototype, {
   emitChange: function(){
@@ -84,26 +32,26 @@ var AppStore = assign(EventEmitter.prototype, {
   },
 
   getCartTotals: function(){
-    return _cartTotals()
+    return CartHelpers.cartTotals(_cartItems)
   },
 
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction
     switch(action.actionType){
       case CartConstants.ADD_ITEM:
-        _addItem(payload.action.item);
+        CartHelpers.addItem(_cartItems, payload.action.item);
         break;
 
       case CartConstants.REMOVE_ITEM:
-        _removeItem(payload.action.index);
+        CartHelpers.removeItem(_cartItems, payload.action.index);
         break;
 
       case CartConstants.INCREASE_ITEM:
-        _increaseItem(payload.action.index);
+        CartHelpers.increaseItem(_cartItems, payload.action.index);
         break;
 
       case CartConstants.DECREASE_ITEM:
-        _decreaseItem(payload.action.index);
+        CartHelpers.decreaseItem(_cartItems, payload.action.index);
         break;
     }
 

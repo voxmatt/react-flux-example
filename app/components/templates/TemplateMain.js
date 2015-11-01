@@ -1,15 +1,15 @@
 var React = require('react');
-var Header = require('./header/app-header.js');
+var HeaderMain = require('../header/HeaderMain.js');
 
-var Template = React.createClass({
+var TemplateMain = React.createClass({
   render:function(){
     return (
       <div className="container">
-        <Header />
+        <HeaderMain />
         {this.props.children}
       </div>
     );
   }
 });
 
-module.exports = Template;
+module.exports = TemplateMain;

@@ -1,16 +1,16 @@
 var React = require('react');
-var AppStore = require('../../stores/app-store.js');
-var RemoveFromCart = require('./app-removefromcart.js');
-var Increase = require('./app-decreaseitem')
-var Decrease = require('./app-increaseitem')
+var CartStore = require('../../stores/CartStore.js');
+var CartRemoveItem = require('./CartRemoveItem.js');
+var Increase = require('./CartDecreaseItem');
+var Decrease = require('./CartIncreaseItem');
 var StoreWatchMixin = require('../../mixins/StoreWatchMixin');
-var Link = require('react-router-component').Link
+var Link = require('react-router-component').Link;
 
 function cartItems(){
-  return {items: AppStore.getCart()}
+  return {items: CartStore.getCart()}
 }
 
-var Cart = React.createClass({
+var CartPage = React.createClass({
   mixins:[StoreWatchMixin(cartItems)],
   render:function(){
     var total = 0;
@@ -19,7 +19,7 @@ var Cart = React.createClass({
       total += subtotal;
       return (
           <tr key={i}>
-            <td><RemoveFromCart index={i} /></td>
+            <td><CartRemoveItem index={i} /></td>
             <td>{item.title}</td>
             <td>{item.qty}</td>
             <td>
@@ -58,4 +58,4 @@ var Cart = React.createClass({
   }
 });
 
-module.exports = Cart
+module.exports = CartPage;

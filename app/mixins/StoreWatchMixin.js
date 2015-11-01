@@ -1,5 +1,5 @@
 var React = require('react');
-var AppStore = require('../stores/app-store');
+var CartStore = require('../stores/CartStore');
 
 var StoreWatchMixin = function(cb){
   return {
@@ -7,10 +7,10 @@ var StoreWatchMixin = function(cb){
       return cb(this)
     },
     componentWillMount:function(){
-      AppStore.addChangeListener(this._onChange)
+      CartStore.addChangeListener(this._onChange)
     },
     componentWillUnmount:function(){
-      AppStore.removeChangeListener(this._onChange)
+      CartStore.removeChangeListener(this._onChange)
     },
     _onChange: function(){
       this.setState(cb(this))

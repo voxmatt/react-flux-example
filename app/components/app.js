@@ -1,22 +1,22 @@
 var React = require('react');
-var Catalog = require('./catalog/app-catalog');
-var Cart = require('./cart/app-cart');
+var CatalogPage = require('./catalog/CatalogPage');
+var CartPage = require('./cart/CartPage');
 var Router = require('react-router-component');
-var CatalogDetail = require('./product/app-catalogdetail');
-var Template = require('./app-template.js');
+var ProductPage = require('./product/ProductPage');
+var TemplateMain = require('./templates/TemplateMain.js');
 var Locations = Router.Locations;
 var Location  = Router.Location;
 
 var App = React.createClass({
   render:function(){
     return (
-      <Template>
+      <TemplateMain>
         <Locations>
-          <Location path="/" handler={Catalog} />
-          <Location path="/cart" handler={Cart} />
-          <Location path="/item/:item" handler={CatalogDetail} />
+          <Location path="/" handler={CatalogPage} />
+          <Location path="/cart" handler={CartPage} />
+          <Location path="/item/:item" handler={ProductPage} />
         </Locations>
-      </Template>
+      </TemplateMain>
     );
   }
 });

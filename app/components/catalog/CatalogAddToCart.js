@@ -1,13 +1,13 @@
 var React = require('react');
-var AppActions = require('../../actions/app-actions');
+var CartActions = require('../../actions/CartActions');
 
-var AddToCart = React.createClass({
+var CatalogAddToCart = React.createClass({
   handler: function(){
-    AppActions.addItem(this.props.item)
+    CartActions.addItem(this.props.item)
   },
   render:function(){
     return <button className="btn btn-default" onClick={this.handler}>Add To Cart</button>
   }
 });
 
-module.exports = AddToCart;
+module.exports = CatalogAddToCart;

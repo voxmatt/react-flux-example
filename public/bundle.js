@@ -49,6 +49,9 @@
 	var App = __webpack_require__(1);
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(204);
+	var ReactDOMServer = __webpack_require__(205);
+	
+	var markup = ReactDOMServer.renderToString(React.createElement(App, { path: '/' }));
 	
 	ReactDOM.render(React.createElement(App, null), document.getElementById('main'));
 
@@ -23404,6 +23407,15 @@
 	'use strict';
 	
 	module.exports = __webpack_require__(4);
+
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(149);
 
 
 /***/ }

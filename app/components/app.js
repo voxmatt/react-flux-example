@@ -11,7 +11,7 @@ var App = React.createClass({
   render:function(){
     return (
       <TemplateMain>
-        <Locations>
+        <Locations path={this.props.path}>
           <Location path="/" handler={CatalogPage} />
           <Location path="/cart" handler={CartPage} />
           <Location path="/item/:item" handler={ProductPage} />

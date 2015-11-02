@@ -2,7 +2,7 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var CartConstants = require('../constants/CartConstants');
 var assign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
-var CartHelpers = require('./CartHelpers');
+import CartHelpers from './CartHelpers';
 
 var CHANGE_EVENT = 'change';
 
